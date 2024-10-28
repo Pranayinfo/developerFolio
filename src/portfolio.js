@@ -21,8 +21,7 @@ const greeting = {
   subTitle: emoji(
     "A passionate DevOps Engineer 🚀 with experience in automating cloud infrastructure using AWS, GCP, Kubernetes, Docker, and other DevOps tools."
   ),
-  resumeLink:
-    "https://drive.google.com/file/d/1Y8o7uhyTmr3pLQLFy41DIDud9YlAZVSl/view?usp=drive_link", // Updated with the correct resume link
+  resumeLink: "https://drive.google.com/uc?export=download&id=1Y8o7uhyTmr3pLQLFy41DIDud9YlAZVSl", // Updated with the correct resume link
   displayGreeting: true // Set false to hide this section, defaults to true
 };
 
@@ -48,15 +47,16 @@ const skillsSection = {
   softwareSkills: [
     { skillName: "AWS", fontAwesomeClassname: "fab fa-aws" },
     { skillName: "GCP", fontAwesomeClassname: "fas fa-cloud" },
-    { skillName: "Kubernetes", fontAwesomeClassname: "fab fa-kubernetes" }, // Correct Font Awesome class
+    { skillName: "Kubernetes", fontAwesomeClassname: "fas fa-cube" }, // Correct Font Awesome class
     { skillName: "Docker", fontAwesomeClassname: "fab fa-docker" },
-    { skillName: "Jenkins", fontAwesomeClassname: "fas fa-tools" },
+    { skillName: "Jenkins", fontAwesomeClassname: "fab fa-jenkins" },
     { skillName: "Terraform", fontAwesomeClassname: "fas fa-code" }, // Alternative for Terraform
     { skillName: "Helm", fontAwesomeClassname: "fas fa-ship" }, // Added Helm
     { skillName: "Ansible", fontAwesomeClassname: "fas fa-cogs" },
     { skillName: "Prometheus", fontAwesomeClassname: "fas fa-chart-bar" },
     { skillName: "Grafana", fontAwesomeClassname: "fas fa-chart-line" },
     { skillName: "Git", fontAwesomeClassname: "fab fa-git" },
+    { skillName: "Github", fontAwesomeClassname: "fab fa-github" },
     { skillName: "Linux", fontAwesomeClassname: "fab fa-linux" }
   ],
   display: true // Set false to hide this section, defaults to true

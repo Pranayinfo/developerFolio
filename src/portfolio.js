@@ -62,20 +62,20 @@ const skillsSection = {
   display: true // Set false to hide this section, defaults to true
 };
 
-// Other sections (education, work experience, projects, etc.) remain unchanged
-
 // Education Section
 const educationInfo = {
   display: true, // Set false to hide this section, defaults to true
   schools: [
     {
       schoolName: "Intellipaat via IIT Roorkee",
+      logo: require("./assets/images/Indian_Institute_of_Technology_Bombay_Logo.svg.png"),
       subHeader: "Post Graduation, Cloud Computing",
       duration: "June 2023 – Present",
       desc: "Focused on cloud infrastructure, DevOps, and scalable architectures."
     },
     {
       schoolName: "Yeshwantrao Chavan College of Engineering",
+      logo: require("./assets/images/yccelogo.png"),
       subHeader: "Bachelor of Engineering, Mechanical Engineering",
       duration: "June 2015 - May 2019",
       desc: "Gained a strong foundation in engineering principles and problem-solving skills."
@@ -94,82 +94,118 @@ const techStack = {
   displayCodersrank: false // Set true to display codersrank badges section, defaults to false
 };
 
-// Work Experience Section (with placeholder logos)
+// Work Experience Section with logos and colors
 const workExperiences = {
   display: true, // Set it to true to show workExperiences Section
   experience: [
     {
       role: "DevOps Engineer",
-      company: "ExcelR Pvt. Ltd.",
-      companyLogo: "https://via.placeholder.com/150", // Placeholder for ExcelR logo
-      date: "Feb 2024 – Present",
-      desc: "Strategized and implemented end-to-end deployment solutions on GCP, ensuring high availability and optimized performance under heavy traffic while enhancing security measures.",
+      company: "PlutosOne",
+      companylogo: require("./assets/images/LogoPlutos.png"),
+      date: "Sep 2024 – Oct 2024",
+      color: "#002366", // Dark blue color for PlutosOne
+      desc: "Focused on cost optimization and migrating infrastructure to Kubernetes Engine (GKE).",
       descBullets: [
-        "Implemented CI/CD pipelines using Cloud Build with Secret Manager for secure environment handling.",
-        "Automated Docker image builds to GCR and deployed to GKE private clusters via Helm charts.",
-        "Set up CI/CD for Cloud Run using Cloud Build, automating serverless deployments.",
-        "Deployed applications using GKE and Helm Charts, configured NGINX Ingress, load balancers, and SSL certificates.",
-        "Managed CloudSQL PostgreSQL and Redis instances for creation, data migration, and maintenance.",
-        "Created a Jump server (bastion host) for secure SSH access to GKE clusters with IAM roles and RBAC."
+        "Containerized applications and wrote Kubernetes manifests.",
+        "Packaged applications using Helm charts for efficient deployments.",
+        "Implemented CI/CD pipeline with Cloud Build for streamlined deployment.",
+        "Deployed the frontend application on Cloud Run for fast, cost-effective scaling."
+      ]
+    },
+    {
+      role: "DevOps Engineer",
+      company: "ExcelR Edtech",
+      companylogo: require("./assets/images/excelr.logo.jpg"),
+      date: "Feb 2024 – Sep 2024 (Freelance - present)",
+      color: "#87CEEB", // Sky blue color for ExcelR
+      desc: "Managed high availability, scalability, and security for their website deployment on GCP.",
+      descBullets: [
+        "Deployed applications on GKE and managed environments: UAT, PERF, staging, and production.",
+        "Configured NGINX Ingress, load balancers, autoscaling groups, and SSL certificates.",
+        "Set up secure access to GKE clusters using a bastion host integrated with IAM and RBAC."
       ]
     },
     {
       role: "DevOps Engineer",
       company: "Molecular Connections Pvt. Ltd.",
-      companyLogo: "https://via.placeholder.com/150", // Placeholder for Molecular Connections logo
-      date: "April 2022 – June 2023",
-      desc: "Managed CI/CD workflows, deployed applications using Docker and Kubernetes, and optimized AWS cloud infrastructure.",
+      companylogo: require("./assets/images/molecularconnection-logo.png"),
+      date: "April 2022 – July 2023",
+      color: "#FFA500", // Light orange color for Molecular Connections
+      desc: "Worked on server administration and DevOps tools across projects like MClexicon and MC Research.",
       descBullets: [
-        "Administered GitLab, Jenkins, and Docker for application deployments.",
-        "Orchestrated services using Kubernetes on AWS EKS.",
-        "Deployed and monitored server pools, handled AWS IAM, EC2, RDS."
+        "Administered Linux servers, GitLab, Jenkins, Docker, and Kubernetes.",
+        "Managed tickets and access controls and resolved daily technical issues.",
+        "Worked on critical projects: MClexicon and MC Research."
       ]
     },
     {
       role: "Analyst",
       company: "HCL Technologies",
-      companyLogo: "https://via.placeholder.com/150", // Placeholder for HCL logo
+      companylogo: require("./assets/images/HCL-Tech.jpeg"),
       date: "Dec 2020 – Sep 2021",
+      color: "#002366", // Dark blue color for HCL
       desc: "Provided technical support and managed platform transitions for P&G employees."
     }
   ]
 };
 
-// Open Source Section
-const openSource = {
-  showGithubProfile: "true", // Set true or false to show Contact profile using Github, defaults to true
-  display: true // Set false to hide this section, defaults to true
-};
-
-// Big Projects Section
+// Big Projects Section with company projects
 const bigProjects = {
   title: "Projects",
   subtitle: "SOME MAJOR PROJECTS I HAVE CONTRIBUTED TO",
   projects: [
     {
-      projectName: "EKS/GKE Deployment with Helm and Ingress",
-      projectDesc: "Deployed a 3-tier application using Helm on GKE/EKS with secure, scalable infrastructure.",
+      projectName: emoji("🚀 CI/CD Pipeline with Cloud Build and GKE"),
+      projectDesc: "Implemented CI/CD pipelines using Cloud Build, with Secret Manager for secure environment handling. Automated Docker image builds to GCR and deployed to GKE private clusters using Helm charts.",
       footerLink: [
-        { name: "View Project", url: "https://github.com/Pranayinfo/EKS-Helm-deployment" }
+        { name: "View on GitHub", url: "https://github.com/Pranayinfo/cloudbuild-GCE-docker-compose-deployment" }
       ]
     },
     {
-      projectName: "Jenkins CI/CD Deployment on AWS EKS",
-      projectDesc: "Automated EKS setup using Terraform with Jenkins pipelines for CI/CD.",
+      projectName: emoji("🔐 EKS/GKE Deployment with Helm, Ingress, and ALB"),
+      projectDesc: "Deployment of a 3-tier application on AWS EKS and GKE using Helm charts, Ingress, and ALB, ensuring secure, scalable infrastructure with AWS/GCP services.",
       footerLink: [
-        { name: "View Project", url: "https://github.com/Pranayinfo/terraform-eks-jenkins-deploy" }
+        { name: "View on GitHub", url: "https://github.com/Pranayinfo/EKS-Helm-deployment/blob/main/README.md" }
       ]
     },
     {
-      projectName: "Serverless GCP Cloud Run CI/CD",
-      projectDesc: "Developed and deployed serverless applications using GCP Cloud Run and Cloud Build.",
+      projectName: emoji("🐳 Deployed Microservices on GCP with Docker-compose"),
+      projectDesc: "Microservices application deployment on GCP using Docker-compose, with nginx proxy, PostgreSQL, Redis, and SSL Certbot for secure web services.",
       footerLink: [
-        { name: "View Project", url: "https://github.com/Pranayinfo/cloud-run-cicd" }
+        { name: "View on GitHub", url: "https://github.com/Pranayinfo/Docker-deployment/" }
+      ]
+    },
+    {
+      projectName: emoji("⚙️ Jenkins CI/CD Deployment on AWS EKS using Terraform"),
+      projectDesc: "Automated setup of AWS EKS cluster and VPC using Terraform, with a Jenkins pipeline for CI/CD to streamline deployment.",
+      footerLink: [
+        { name: "View on GitHub", url: "https://github.com/Pranayinfo/terraform-eks-jenkins-deploy/blob/main/README.md" }
+      ]
+    },
+    {
+      projectName: emoji("☁️ Frontend Application Deployment on GCP Cloud Run"),
+      projectDesc: "Deployed a frontend application on GCP Cloud Run using serverless architecture with CI/CD via Cloud Build and Secret Manager integration.",
+      footerLink: [
+        { name: "View on GitHub", url: "https://github.com/Pranayinfo/cloudbuild-cloudrun-deployment" }
+      ]
+    },
+    {
+      projectName: emoji("📂 Hesk Help Desk Deployment with Docker-compose"),
+      projectDesc: "Deployment of the Hesk Help Desk application using Docker-compose for managing documentation, collaboration, and ticketing.",
+      footerLink: [
+        { name: "View on GitHub", url: "https://github.com/Pranayinfo/Hesk-help-desk" }
       ]
     }
   ],
   display: true // Set false to hide this section, defaults to true
 };
+
+const openSource = {
+  showGithubProfile: "true", // Set true or false to show Contact profile using Github, defaults to true
+  display: true // Set false to hide this section, defaults to true
+};
+
+// Some big projects you have worked on
 
 // Achievements Section
 const achievementSection = {
@@ -220,18 +256,18 @@ const blogSection = {
 const resumeSection = {
   title: "Resume",
   subtitle: "Download my resume to learn more about my experience.",
-  resumeLink: "https://drive.google.com/file/d/1Y8o7uhyTmr3pLQLFy41DIDud9YlAZVSl/view?usp=drive_link", // Updated resume link
+  resumeLink: "https://drive.google.com/uc?export=download&id=1Y8o7uhyTmr3pLQLFy41DIDud9YlAZVSl", // Updated resume link
   display: true // Set false to hide this section
 };
 
-// isHireable
-const isHireable = true; // Set true if you are open for job opportunities
-
 // Twitter Section
 const twitterDetails = {
-  userName: "Pranayinfo",
+  userName: "PranayP49",
   display: true // Set true to display this section, defaults to false
 };
+
+const isHireable = false; // Set false if you are not looking for a job. Also isHireable will be display as Open for opportunities: Yes/No in the GitHub footer
+
 
 // Export all sections
 export {
@@ -243,8 +279,8 @@ export {
   educationInfo,
   techStack,
   workExperiences,
-  openSource,
   bigProjects,
+  openSource,
   achievementSection,
   contactInfo,
   blogSection,

@@ -1,29 +1,43 @@
-# This file is the main docker file configurations
+# Stage 1: Build the React app
+FROM node:20.0-alpine AS build
 
-# Official Node JS runtime as a parent image
-FROM node:20.0-alpine
-
-# Set the working directory to ./app
+# Set the working directory to /app
 WORKDIR /app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package.json ./
-
+# Install git (for projects that rely on git dependencies)
 RUN apk add --no-cache git
 
-# Install any needed packages
+# Copy package.json and package-lock.json files
+COPY package.json ./
+
+# Set Node.js heap size for the build stage
+ENV NODE_OPTIONS="--max-old-space-size=2048"  # Set heap size to 2GB
+
+# Install dependencies
 RUN npm install
 
-# Audit fix npm packages
-RUN npm audit fix
+# Copy the app source
+COPY . .
 
-# Bundle app source
-COPY . /app
+# Build the app for production
+RUN npm run build
 
-# Make port 3000 available to the world outside this container
+# Stage 2: Serve the production build with a lightweight web server
+FROM node:20.0-alpine
+
+# Set Node.js heap size for the production stage (if needed)
+# You can omit this if your app served by `serve` does not require it.
+ENV NODE_OPTIONS="--max-old-space-size=2048"  # Set heap size to 2GB
+
+# Install `serve` to serve the production build
+RUN npm install -g serve
+
+# Copy the production build from the build stage
+COPY --from=build /app/build /app/build
+
+# Expose port 3000
 EXPOSE 3000
 
-# Run app.js when the container launches
-CMD ["npm", "start"]
+# Serve the app
+CMD ["serve", "-s", "/app/build", "-l", "3000"]
+

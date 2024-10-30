@@ -20,7 +20,7 @@ steps:
       - '--platform=managed'
       - '--allow-unauthenticated'
       - '--port=3000' # Set the port to 3000
-      - '--memory=512Mi' # Allocate 512Mi memory
+      - '--memory=2Gi' # Allocate 512Mi memory
       - '--set-env-vars=NODE_ENV=production' # Set environment to production
 
 options:

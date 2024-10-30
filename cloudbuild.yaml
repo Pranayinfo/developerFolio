@@ -1,4 +1,3 @@
-######
 steps:
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
@@ -7,35 +6,22 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '--no-cache', '-t', 'gcr.io/$PROJECT_ID/${_APP_NAME}:$BRANCH_NAME', '--build-arg', 'ENV=${_ENV}', '.']
 
-  # - id: scan
-  #   name: gcr.io/google.com/cloudsdktool/cloud-sdk
-  #   entrypoint: /bin/bash
-  #   args:
-  #   - -c
-  #   - |
-  #     gcloud artifacts docker images scan gcr.io/$PROJECT_ID/${_APP_NAME}:$BRANCH_NAME:latest \
-  #     --format='value(response.scan)' > /workspace/scan_id.txt
-  #   if: 'startsWith($BRANCH_NAME, "production")'
-
-  # # Conditional step for severity check
-  # - id: severity-check
-  #   name: gcr.io/google.com/cloudsdktool/cloud-sdk
-  #   entrypoint: /bin/bash
-  #   args:
-  #   - -c
-  #   - |
-  #     gcloud artifacts docker images list-vulnerabilities $(cat /workspace/scan_id.txt) \
-  #     --format='value(vulnerability.effectiveSeverity)' | if grep -Exq $_SEVERITY; \
-  #     then echo 'Failed vulnerability check' && exit 1; else exit 0; fi
-  #   if: 'startsWith($BRANCH_NAME, "production")'
-
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/${_APP_NAME}:$BRANCH_NAME']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
-    args: ['run', 'deploy', '${_APP_NAME}-$BRANCH_NAME', '--image', 'gcr.io/$PROJECT_ID/${_APP_NAME}:$BRANCH_NAME', '--region', '${_REGION}', '--platform', 'managed', '--allow-unauthenticated']
-        
+    args:
+      - 'run'
+      - 'deploy'
+      - '${_APP_NAME}-$BRANCH_NAME'
+      - '--image=gcr.io/$PROJECT_ID/${_APP_NAME}:$BRANCH_NAME'
+      - '--region=${_REGION}'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=3000' # Set the port to 3000
+      - '--memory=512Mi' # Allocate 512Mi memory
+      - '--set-env-vars=NODE_ENV=production' # Set environment to production
 
 options:
   logging: CLOUD_LOGGING_ONLY

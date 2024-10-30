@@ -1,0 +1,48 @@
+######
+steps:
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: 'bash'
+    args: [ '-c', "gcloud secrets versions access latest --secret=$BRANCH_NAME-${_APP_NAME} --format='get(payload.data)' | tr '_-' '/+' | base64 -d > .env" ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '--no-cache', '-t', 'gcr.io/$PROJECT_ID/${_APP_NAME}:$BRANCH_NAME', '--build-arg', 'ENV=${_ENV}', '.']
+
+  # - id: scan
+  #   name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  #   entrypoint: /bin/bash
+  #   args:
+  #   - -c
+  #   - |
+  #     gcloud artifacts docker images scan gcr.io/$PROJECT_ID/${_APP_NAME}:$BRANCH_NAME:latest \
+  #     --format='value(response.scan)' > /workspace/scan_id.txt
+  #   if: 'startsWith($BRANCH_NAME, "production")'
+
+  # # Conditional step for severity check
+  # - id: severity-check
+  #   name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  #   entrypoint: /bin/bash
+  #   args:
+  #   - -c
+  #   - |
+  #     gcloud artifacts docker images list-vulnerabilities $(cat /workspace/scan_id.txt) \
+  #     --format='value(vulnerability.effectiveSeverity)' | if grep -Exq $_SEVERITY; \
+  #     then echo 'Failed vulnerability check' && exit 1; else exit 0; fi
+  #   if: 'startsWith($BRANCH_NAME, "production")'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/${_APP_NAME}:$BRANCH_NAME']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: ['run', 'deploy', '${_APP_NAME}-$BRANCH_NAME', '--image', 'gcr.io/$PROJECT_ID/${_APP_NAME}:$BRANCH_NAME', '--region', '${_REGION}', '--platform', 'managed', '--allow-unauthenticated']
+        
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _REGION: asia-south1 # Change this to your preferred region
+  _ENV: development # Default environment, can be overridden by build trigger
+  _APP_NAME: portfolio
+  _SEVERITY: CRITICAL
+timeout: "800s"

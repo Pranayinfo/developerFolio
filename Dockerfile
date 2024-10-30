@@ -1,32 +1,29 @@
-# Stage 1: Build
-FROM node:14 AS builder
+# This file is the main docker file configurations
 
-# Set the working directory
+# Official Node JS runtime as a parent image
+FROM node:20.0-alpine
+
+# Set the working directory to ./app
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package.json ./
 
-# Install dependencies
+RUN apk add --no-cache git
+
+# Install any needed packages
 RUN npm install
 
-# Copy the rest of the application code
-COPY . .
+# Audit fix npm packages
+RUN npm audit fix
 
-# Stage 2: Production
-FROM node:14
+# Bundle app source
+COPY . /app
 
-# Set the working directory
-WORKDIR /app
-
-# Copy only the necessary files from the builder stage
-COPY --from=builder /app .
-
-# Set Node.js heap size
-ENV NODE_OPTIONS="--max-old-space-size=2048"  # Set heap size to 2GB
-
-# Expose the port
+# Make port 3000 available to the world outside this container
 EXPOSE 3000
 
-# Start the application
+# Run app.js when the container launches
 CMD ["npm", "start"]

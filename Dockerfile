@@ -40,4 +40,3 @@ EXPOSE 3000
 
 # Serve the app
 CMD ["serve", "-s", "/app/build", "-l", "3000"]
-

@@ -1,42 +1,32 @@
-# Stage 1: Build the React app
-FROM node:20.0-alpine AS build
+# Stage 1: Build
+FROM node:14 AS builder
 
-# Set the working directory to /app
+# Set the working directory
 WORKDIR /app
 
-# Install git (for projects that rely on git dependencies)
-RUN apk add --no-cache git
-
-# Copy package.json and package-lock.json files
-COPY package.json ./
-
-# Set Node.js heap size for the build stage
-ENV NODE_OPTIONS="--max-old-space-size=2048"  # Set heap size to 2GB
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the app source
+# Copy the rest of the application code
 COPY . .
 
-# Build the app for production
-RUN npm run build
+# Stage 2: Production
+FROM node:14
 
-# Stage 2: Serve the production build with a lightweight web server
-FROM node:20.0-alpine
+# Set the working directory
+WORKDIR /app
 
-# Set Node.js heap size for the production stage (if needed)
-# You can omit this if your app served by `serve` does not require it.
+# Copy only the necessary files from the builder stage
+COPY --from=builder /app .
+
+# Set Node.js heap size
 ENV NODE_OPTIONS="--max-old-space-size=2048"  # Set heap size to 2GB
 
-# Install `serve` to serve the production build
-RUN npm install -g serve
-
-# Copy the production build from the build stage
-COPY --from=build /app/build /app/build
-
-# Expose port 3000
+# Expose the port
 EXPOSE 3000
 
-# Serve the app
-CMD ["serve", "-s", "/app/build", "-l", "3000"]
+# Start the application
+CMD ["npm", "start"]

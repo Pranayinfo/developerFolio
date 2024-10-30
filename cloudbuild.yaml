@@ -41,8 +41,8 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
-  _REGION: asia-south1 # Change this to your preferred region
+  _REGION: us-central1 # Change this to your preferred region
   _ENV: development # Default environment, can be overridden by build trigger
-  _APP_NAME: portfolio
+  _APP_NAME: devfolio
   _SEVERITY: CRITICAL
 timeout: "800s"

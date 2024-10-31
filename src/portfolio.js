@@ -44,7 +44,7 @@ const skillsSection = {
     emoji("⚡ Managing databases and in-memory storage systems like PostgreSQL and Redis."),
     emoji("⚡ Monitoring infrastructure using Prometheus and Grafana for real-time insights.")
   ],
-  softwareSkills: [
+   softwareSkills: [
     { skillName: "AWS", fontAwesomeClassname: "fab fa-aws" },
     { skillName: "GCP", fontAwesomeClassname: "fas fa-cloud" },
     { skillName: "Kubernetes", fontAwesomeClassname: "fas fa-cube" }, // Correct Font Awesome class
@@ -61,7 +61,6 @@ const skillsSection = {
   ],
   display: true // Set false to hide this section, defaults to true
 };
-
 // Education Section
 const educationInfo = {
   display: true, // Set false to hide this section, defaults to true
@@ -141,12 +140,26 @@ const workExperiences = {
     {
       role: "Analyst",
       company: "HCL Technologies",
-      companylogo: require("./assets/images/HCL-Tech.jpeg"),
+      companylogo: require("./assets/images/HCL-Tech.webp"),
       date: "Dec 2020 – Sep 2021",
       color: "#002366", // Dark blue color for HCL
       desc: "Provided technical support and managed platform transitions for P&G employees."
     }
   ]
+};
+
+const openSource = {
+  showGithubProfile: "true", // Set true or false to show Contact profile using Github, defaults to true
+    projects: [
+    {
+      projectName: emoji("🚀 CI/CD Pipeline with Cloud Build and GKE"),
+      projectDesc: "Implemented CI/CD pipelines using Cloud Build, with Secret Manager for secure environment handling. Automated Docker image builds to GCR and deployed to GKE private clusters using Helm charts.",
+      footerLink: [
+        { name: "View on GitHub", url: "https://github.com/Pranayinfo/cloudbuild-GCE-docker-compose-deployment" }
+      ]
+    }
+    ],
+  display: true // Set false to hide this section, defaults to true
 };
 
 // Big Projects Section with company projects
@@ -156,6 +169,7 @@ const bigProjects = {
   projects: [
     {
       projectName: emoji("🚀 CI/CD Pipeline with Cloud Build and GKE"),
+      image: require("./assets/images/cloudbuild.jpg"),
       projectDesc: "Implemented CI/CD pipelines using Cloud Build, with Secret Manager for secure environment handling. Automated Docker image builds to GCR and deployed to GKE private clusters using Helm charts.",
       footerLink: [
         { name: "View on GitHub", url: "https://github.com/Pranayinfo/cloudbuild-GCE-docker-compose-deployment" }
@@ -163,6 +177,7 @@ const bigProjects = {
     },
     {
       projectName: emoji("🔐 EKS/GKE Deployment with Helm, Ingress, and ALB"),
+      image: require("./assets/images/excelr-GCP-Arch.drawio (18).png"),
       projectDesc: "Deployment of a 3-tier application on AWS EKS and GKE using Helm charts, Ingress, and ALB, ensuring secure, scalable infrastructure with AWS/GCP services.",
       footerLink: [
         { name: "View on GitHub", url: "https://github.com/Pranayinfo/EKS-Helm-deployment/blob/main/README.md" }
@@ -170,6 +185,7 @@ const bigProjects = {
     },
     {
       projectName: emoji("🐳 Deployed Microservices on GCP with Docker-compose"),
+      image: require("./assets/images/gcp-docker.jpg"),
       projectDesc: "Microservices application deployment on GCP using Docker-compose, with nginx proxy, PostgreSQL, Redis, and SSL Certbot for secure web services.",
       footerLink: [
         { name: "View on GitHub", url: "https://github.com/Pranayinfo/Docker-deployment/" }
@@ -177,6 +193,7 @@ const bigProjects = {
     },
     {
       projectName: emoji("⚙️ Jenkins CI/CD Deployment on AWS EKS using Terraform"),
+      image: require("./assets/images/aws-jenkis.drawio.png"),
       projectDesc: "Automated setup of AWS EKS cluster and VPC using Terraform, with a Jenkins pipeline for CI/CD to streamline deployment.",
       footerLink: [
         { name: "View on GitHub", url: "https://github.com/Pranayinfo/terraform-eks-jenkins-deploy/blob/main/README.md" }
@@ -184,6 +201,7 @@ const bigProjects = {
     },
     {
       projectName: emoji("☁️ Frontend Application Deployment on GCP Cloud Run"),
+      image: require("./assets/images/cloudbuild-docker.jpg"),
       projectDesc: "Deployed a frontend application on GCP Cloud Run using serverless architecture with CI/CD via Cloud Build and Secret Manager integration.",
       footerLink: [
         { name: "View on GitHub", url: "https://github.com/Pranayinfo/cloudbuild-cloudrun-deployment" }
@@ -191,61 +209,97 @@ const bigProjects = {
     },
     {
       projectName: emoji("📂 Hesk Help Desk Deployment with Docker-compose"),
+      image: require("./assets/images/Hesk-deploy.jpg"),
       projectDesc: "Deployment of the Hesk Help Desk application using Docker-compose for managing documentation, collaboration, and ticketing.",
       footerLink: [
         { name: "View on GitHub", url: "https://github.com/Pranayinfo/Hesk-help-desk" }
       ]
-    }
-  ],
-  display: true // Set false to hide this section, defaults to true
-};
-
-const openSource = {
-  showGithubProfile: "true", // Set true or false to show Contact profile using Github, defaults to true
-  display: true // Set false to hide this section, defaults to true
-};
-
-// Some big projects you have worked on
-
-// Achievements Section
-const achievementSection = {
-  title: emoji("Achievements 🏆"),
-  subtitle: "Certifications and awards showcasing my expertise.",
-  achievementsCards: [
-    {
-      title: "AWS Solution Architect Certification",
-      subtitle: "Certified AWS Solution Architect - Associate Level.",
-      footerLink: [
-        { name: "View Certificate", url: "https://www.your-cert-link.com" }
-      ]
     },
-    {
-      title: "DevOps Certification",
-      subtitle: "Certified DevOps Engineer from Intellipaat.",
-      footerLink: [
-        { name: "View Certificate", url: "https://www.your-cert-link.com" }
-      ]
+      {
+      projectName: emoji("🚀 CI/CD with Ansible and Jenkins"),
+      image: require("./assets/images/jenkins-ansible.drawio (3).png"),
+      projectDesc: "Configured Jenkins to trigger Ansible playbooks for seamless integration, reducing manual intervention in deployment.",
+      footerLink: [{ name: "View on GitHub", url: "https://github.com/Pranayinfo/myansible" }]
     }
   ],
   display: true // Set false to hide this section, defaults to true
 };
+
+// Certifications Section with images and updated titles
+const achievementSection = {
+    title: emoji("Certifications 📜"),
+    subtitle: "Certifications showcasing my expertise.",
+    achievementsCards: [
+      {
+        title: "AWS Solution Architect Certification",
+        subtitle: "Issued by Intellipaat",
+        image: require("./assets/images/Amazon_Web_Services-Logo.wine.png"),
+        footerLink: [
+          { name: "View Certificate", url: "https://www.your-cert-link.com" }
+        ]
+      },
+      {
+        title: "DevOps Certification",
+        subtitle: "Issued by Intellipaat",
+        image: require("./assets/images/awsdevopslogo.png"),
+        footerLink: [
+          { name: "View Certificate", url: "https://www.your-cert-link.com" }
+        ]
+      },
+      {
+        title: "DevOps Bootcamp",
+        subtitle: "Issued by Edureka",
+        image: require("./assets/images/devopslogo.jpg"),
+        footerLink: [
+          { name: "View Certificate", url: "https://www.your-cert-link.com" }
+        ]
+      }
+    ],
+    display: true // Set false to hide this section, defaults to true
+  };
 
 // Contact Info
 const contactInfo = {
-  title: emoji("Contact Me ☎️"),
-  subtitle: "Discuss a project or just want to say hi? My inbox is open.",
-  number: "+91-9049490697",
-  email_address: "pranaypaunikar48@gmail.com"
+  title: emoji("📞 Let's Connect!"),
+  subtitle: "Passionate about DevOps, cloud infrastructure, and innovative solutions! Whether you're looking to collaborate on a project, discuss job opportunities, or just chat about the latest in tech, I'd love to hear from you! 🚀",
+  contactMethods: [
+    { 
+      icon: emoji("📱"),
+      label: "Phone",
+      info: "+91-9049490697"
+    },
+    { 
+      icon: emoji("📧"),
+      label: "Email",
+      info: "pranaypaunikar48@gmail.com"
+    },
+    { 
+      icon: emoji("💼"),
+      label: "LinkedIn",
+      info: "https://www.linkedin.com/in/pranay-paunikar"
+    },
+    { 
+      icon: emoji("💻"),
+      label: "GitHub",
+      info: "https://github.com/Pranayinfo"
+    }
+  ],
+  whatsappQR: {
+    label: "WhatsApp",
+    imageUrl: require("./assets/images/whatsapplogo.png"), // Path to the QR code image
+    alt: "Scan to chat on WhatsApp",
+  },
+  display: true // Set true to show this section
 };
 
 // Blog Section
 const blogSection = {
-  title: "Blogs",
+  title: emoji("Blogs ✍️"),
   subtitle: "I love to write and share my knowledge on various tech topics.",
   blogs: [
     {
       url: "https://medium.com/@pranaypaunikar",
-      title: "Example Blog Title",
+      title: "Example Blog Title 📰",
       description: "A short description of your blog post."
     }
   ],
@@ -254,8 +308,8 @@ const blogSection = {
 
 // Resume Section
 const resumeSection = {
-  title: "Resume",
-  subtitle: "Download my resume to learn more about my experience.",
+  title: emoji("Resume 📄"),
+  subtitle: "Download my resume to learn more about my experience and skills.",
   resumeLink: "https://drive.google.com/uc?export=download&id=1Y8o7uhyTmr3pLQLFy41DIDud9YlAZVSl", // Updated resume link
   display: true // Set false to hide this section
 };
@@ -267,7 +321,6 @@ const twitterDetails = {
 };
 
 const isHireable = false; // Set false if you are not looking for a job. Also isHireable will be display as Open for opportunities: Yes/No in the GitHub footer
-
 
 // Export all sections
 export {
